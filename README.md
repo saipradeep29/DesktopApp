@@ -9,7 +9,7 @@ Ensure you have Visual Studio installed to open and run the project.
 Newtonsoft.Json Package: This project uses Newtonsoft.Json for JSON serialization. Make sure it's included in your project references. If not, you can install it via NuGet Package Manager:
 bash
 Copy code
-Install-Package Newtonsoft.Json
+'Install-Package Newtonsoft.Json'
 Node.js and npm: Required to run the backend server locally.
 Express and body-parser: These Node.js packages are used for the server-side implementation.
 # Getting Started
@@ -17,7 +17,7 @@ Follow these steps to get the project up and running on your local machine:
 
 Clone the Repository:
 Copy code
-git clone https://github.com/saipradeep29/DesktopApp.git
+'git clone https://github.com/saipradeep29/DesktopApp.git'
 Open Solution in Visual Studio:
 
 Navigate to the FormSubmissionApp directory.
@@ -27,13 +27,13 @@ Install Dependencies:
 Ensure Newtonsoft.Json package is installed in your project.
 Set up Node.js server:
 Copy code
-cd server
-npm install
+'cd server'
+'npm install'
 
 Run the Application:
 Start the Node.js server:
 Copy code
-npm start
+'npm start'
 Run the application from Visual Studio by pressing F5 or clicking on the "Start" button.
 Usage:
 
