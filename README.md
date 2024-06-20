@@ -47,11 +47,8 @@ Backend: Node.js, Express.js
 Database: In-memory (submissions stored in an array)
 # working gudie 
 below attached images shows how it looks 
-main page
 ![Screenshot 2024-06-20 192418](https://github.com/saipradeep29/DesktopApp/assets/105792542/f476a9bd-3ebd-484d-ba3a-0514ab51f4cc)
-view submissionform
 ![Screenshot 2024-06-20 192513](https://github.com/saipradeep29/DesktopApp/assets/105792542/37f74174-dae0-44fe-aa78-c0461391f305)
-create submissionform
 ![Screenshot 2024-06-20 192558](https://github.com/saipradeep29/DesktopApp/assets/105792542/bd92a6c2-76f9-450d-8436-dfde0eaa849f)
 ![Screenshot 2024-06-20 192704](https://github.com/saipradeep29/DesktopApp/assets/105792542/298ffa3d-4a3d-486a-ac87-be7cc800fa94)
 
