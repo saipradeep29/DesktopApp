@@ -23,7 +23,7 @@ Partial Class ViewSubmissionsForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.txtFullName = New System.Windows.Forms.TextBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -40,14 +40,14 @@ Partial Class ViewSubmissionsForm
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'txtName
+        'txtFullName
         '
-        Me.txtName.BackColor = System.Drawing.SystemColors.ScrollBar
-        Me.txtName.Location = New System.Drawing.Point(314, 79)
-        Me.txtName.Name = "txtName"
-        Me.txtName.ReadOnly = True
-        Me.txtName.Size = New System.Drawing.Size(213, 22)
-        Me.txtName.TabIndex = 0
+        Me.txtFullName.BackColor = System.Drawing.SystemColors.ScrollBar
+        Me.txtFullName.Location = New System.Drawing.Point(314, 79)
+        Me.txtFullName.Name = "txtFullName"
+        Me.txtFullName.ReadOnly = True
+        Me.txtFullName.Size = New System.Drawing.Size(213, 22)
+        Me.txtFullName.TabIndex = 0
         '
         'ContextMenuStrip1
         '
@@ -193,7 +193,7 @@ Partial Class ViewSubmissionsForm
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.txtName)
+        Me.Controls.Add(Me.txtFullName)
         Me.KeyPreview = True
         Me.Name = "ViewSubmissionsForm"
         Me.Text = "ViewSubmissionsForm"
@@ -202,7 +202,7 @@ Partial Class ViewSubmissionsForm
 
     End Sub
 
-    Friend WithEvents txtName As TextBox
+    Friend WithEvents txtFullName As TextBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label

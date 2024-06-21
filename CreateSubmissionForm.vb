@@ -3,6 +3,8 @@ Imports System.Net
 Imports System.Text
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports System.Diagnostics
+Imports System.Net.Http
 
 Public Class CreateSubmissionForm
     Private stopwatch As New Stopwatch()
@@ -42,7 +44,7 @@ Public Class CreateSubmissionForm
     End Sub
 
     ' Submit button click event
-    Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+    Private Async Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
         ' Validate inputs
         If Not ValidateInputs() Then
             Return
@@ -53,37 +55,36 @@ Public Class CreateSubmissionForm
         Dim emailValue As String = txtEmail.Text.Trim()
         Dim phoneValue As String = txtPhone.Text.Trim()
         Dim githubLinkValue As String = txtGithub.Text.Trim()
-        Dim stopwatchTimeValue As String = display.Text
+        Dim stopwatchTimeValue As TimeSpan = TimeSpan.Parse(display.Text)  ' Convert display text to TimeSpan
+        Dim submission As New FormSubmission(nameValue, emailValue, phoneValue, githubLinkValue, stopwatchTimeValue.ToString())
 
-        ' Create the submission object
-        Dim submission As New Submission(nameValue, emailValue, phoneValue, githubLinkValue, stopwatchTimeValue)
+        Dim submissionData As New With {
+        .name = nameValue,
+        .email = emailValue,
+        .phone = phoneValue,
+        .github_link = githubLinkValue,
+        .stopwatch_time = stopwatchTimeValue
+    }
 
         ' Convert submission object to JSON
         Dim json As String = JsonConvert.SerializeObject(submission)
 
         ' Send the JSON data to the server
         Try
-            Dim request As HttpWebRequest = CType(WebRequest.Create("http://localhost:3000/submit"), HttpWebRequest)
-            request.Method = "POST"
-            request.ContentType = "application/json"
-            Dim data As Byte() = Encoding.UTF8.GetBytes(json)
-            request.ContentLength = data.Length
+            Using client As New HttpClient()
+                Dim content As New StringContent(json, Encoding.UTF8, "application/json")
+                Dim response As HttpResponseMessage = Await client.PostAsync("http://localhost:3000/submit", content)
 
-            Using stream As Stream = request.GetRequestStream()
-                stream.Write(data, 0, data.Length)
-            End Using
-
-            Using response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
-                If response.StatusCode = HttpStatusCode.Created Then
+                If response.IsSuccessStatusCode Then
                     MessageBox.Show("Submission successful")
                 Else
-                    MessageBox.Show("Error submitting data: " & response.StatusDescription)
+                    Dim errorMessage As String = "Error submitting data: " & response.ReasonPhrase
+                    MessageBox.Show(errorMessage)
                 End If
             End Using
         Catch ex As Exception
             MessageBox.Show("Error submitting data: " & ex.Message)
         End Try
-
         ' Reset the form and stopwatch
         ClearForm()
     End Sub
@@ -154,4 +155,18 @@ Public Class CreateSubmissionForm
     End Sub
 End Class
 
+Public Class FormSubmission
+    Public Property FullName As String
+    Public Property Email As String
+    Public Property Phone As String
+    Public Property GithubLink As String
+    Public Property StopwatchTime As String
 
+    Public Sub New(fullName As String, email As String, phone As String, githubLink As String, stopwatchTime As String)
+        Me.FullName = fullName
+        Me.Email = email
+        Me.Phone = phone
+        Me.GithubLink = githubLink
+        Me.StopwatchTime = stopwatchTime
+    End Sub
+End Class
